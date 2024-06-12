@@ -8,6 +8,17 @@ import backgroundImage from './img/clouds.jpg'; // Importa la imagen de nubes
 
 const API_WEATHER = `https://api.weatherapi.com/v1/current.json?key=${import.meta.env.VITE_API_KEY}&lang=es&q=`;
 
+// Buúqueda
+const guardarBusqueda = (ubicacion) => {
+  axios.post('http://localhost:5000/api/historialBusqueda', { location: ubicacion })
+    .then(response => {
+      console.log('Historial guardado:', response.data);
+    })
+    .catch(error => {
+      console.error('Error guardando el historial:', error);
+    });
+};
+
 export default function App() {
   const [city, setCity] = useState("");
   const [loading, setLoading] = useState(false) ;
@@ -103,7 +114,7 @@ export default function App() {
         justifyContent: 'center',
         minHeight: '100vh',
         backgroundImage: `url(${backgroundImage})`,
-        backgroundSize: 'cover',
+        backgroundSize: '100%',
         backgroundPosition: 'center',
         backgroundRepeat: 'no-repeat',
       }}
